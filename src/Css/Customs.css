@@ -1,6 +1,9 @@
 .filtro_gris{
     filter: grayscale(55%);
 }
+.filtro_gris_2{
+    filter: grayscale(20%);
+}
 .filtro_sin_gris{
     filter: grayscale(0%);
 }
