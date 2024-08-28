@@ -14,10 +14,10 @@ function App() {
 
   return (
     <>
-    <BrowserRouter basename="/ReproMultiReact">
+    <BrowserRouter basename="/ReproMultiReact/">
       <Cabecera/>
       <Routes>
-        <Route path="/Home" element={<Home/>}/>
+        <Route path="/" element={<Home/>}/>
         <Route path="/Video" element={<Video/>}/>
         <Route path="/Musica" element={<Musica/>}/>
         <Route path="/Descarga" element={<Descarga/>}/>

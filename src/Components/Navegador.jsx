@@ -7,7 +7,7 @@ const Navegador = () => {
         <div class="fixed items-center bottom-0 w-full h-[60px] fondo_gradiente">
             <nav class="h-full pt-1">
                 <ul class="flex justify-evenly h-full items-center">
-                <Link to="/Home" class="w-20">
+                <Link to="/" class="w-20">
                     <li class="flex flex-col gap-1 items-center">
                     <i class="fa-solid fa-house text-[22px]"></i>
                     <span class="text-[11px]">Inicio</span>
