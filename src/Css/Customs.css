@@ -13,6 +13,9 @@
 .aspecto{
     aspect-ratio: 1/1.3;
 }
+.aspecto_video{
+    aspect-ratio: 16/9;
+}
 .espacio_scroll{
     scrollbar-gutter: stable;
 }
@@ -25,3 +28,7 @@
     border-radius: 5px;
 }
 
+input:focus {
+    outline: none; /* Define un contorno azul de 2px */
+    box-shadow: 0 0 0 1px #ff4081; 
+}
