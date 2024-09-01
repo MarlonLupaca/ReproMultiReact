@@ -28,7 +28,23 @@
     border-radius: 5px;
 }
 
-input:focus {
-    outline: none; /* Define un contorno azul de 2px */
+.box_sha {
+    outline: none; 
     box-shadow: 0 0 0 1px #ff4081; 
+}
+input:focus{
+    outline:none;
+}
+
+.movimiento{
+    animation: girar 5s linear infinite;
+}
+
+@keyframes girar {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

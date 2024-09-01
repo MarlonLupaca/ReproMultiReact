@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 
 const Cabecera = () => {
@@ -8,12 +9,16 @@ const Cabecera = () => {
                 <img src="Logo_pri.svg" alt="logo" className='h-[45px]'/>
                 <span className='text-[20px] font-[700]'>SOUNDLY</span>
             </div>
-            <div className='flex items-center gap-2'>
+            <div className='flex items-center gap-4 '>
                 <img src='assets/login.jpg' alt="Logo" className='rounded-full h-[30px]'/>
                 <div className='flex flex-col text-[12px] font-[600]'>
                     <span>Juan Albert</span>
                     <span>Lopes Aliaga</span>
                 </div>
+                <Link to="/">
+                    <i className="fa-solid fa-right-from-bracket  text-[20px]"></i>
+                </Link>
+                
             </div>
         </div>
     )
