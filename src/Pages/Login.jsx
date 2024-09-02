@@ -7,7 +7,7 @@ const Login = () => {
             <div className='h-[90%] w-[90%] flex flex-col  items-center justify-center gap-6 p-4'>
                 <div className=' h-[100px] flex flex-col justify-center items-center mb-4' >
                     <img src="Logo_pri.svg" alt="" className='h-[50px] movimiento'/>
-                    <span className='font-[800] text-[27px]'>Inicia sesión en Soundly</span>
+                    <span className='font-[800] text-[26px]'>Inicia sesión en Soundly</span>
                     
                 </div>
                 <div className='flex flex-col gap-2 w-full'>
