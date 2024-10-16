@@ -11,7 +11,7 @@ const Home = () => {
     return (
         <>
             <Cabecera/>
-            <main className="flex flex-col gap-10 py-4 mb-[120px] md:ml-[210px] md:h-[550px] md:overflow-y-auto md:bg-[#212121]">
+            <main className="flex flex-col gap-10 py-4 md:ml-[210px] md:h-[550px] md:overflow-y-auto md:bg-[#212121]">
                 <Caja_Recientes cancion="cancion1"/> 
                 <Caja_Archivos/>
             </main>

@@ -31,7 +31,7 @@ const Navegador = () => {
                             <span class="text-[11px] md:text-[16px]">Descargar</span>
                         </li>
                     </Link>
-                    <Link to="#" class="w-20">
+                    <Link to="/Admin" class="w-20">
                         <li class="flex flex-col  gap-1 md:gap-3 items-center md:flex-row md:items-center">
                             <i class="fa-solid fa-user-tie text-[22px] md:text-[25px]"></i>
                             <span class="text-[11px] md:text-[16px]">Admin</span>
