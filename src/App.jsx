@@ -8,6 +8,7 @@ import Video from "./Pages/Video";
 import Musica from "./Pages/Musica";
 import Descarga from "./Pages/Descarga";
 import Login from "./Pages/Login";
+import Admin from "./Pages/Admin";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/Video" element={<Video/>}/>
         <Route path="/Musica" element={<Musica/>}/>
         <Route path="/Descarga" element={<Descarga/>}/>
+        <Route path="/Admin" element={<Admin/>}/>
       </Routes>
       
     </HashRouter>
