@@ -25,7 +25,7 @@ function App() {
         <Route path="/Descarga" element={<Descarga/>}/>
       </Routes>
       
-      </HashRouter>
+    </HashRouter>
       
       
     </>

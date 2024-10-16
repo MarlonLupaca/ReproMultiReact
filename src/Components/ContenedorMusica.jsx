@@ -3,7 +3,7 @@ import "../Css/Customs.css"
 
 const ContenedorMusica = () => {
     return (
-        <div className='fixed w-full h-[60px] bottom-[60px] px-5 flex flex-col justify-center'>
+        <div className='fixed w-full h-[60px] bottom-[60px] px-5 flex flex-col justify-center md:hidden'>
             <div className='w-full h-full rounded-[8px] bg-[rgb(247,9,243)] flex items-center p-2 justify-between filtro_gris'>
                 <div className='flex gap-3 ml-1'>
                     <img src="assets/cancionRepro.jpg" alt="" className='h-[45px] rounded-[5px] filtro_sin_gris'/>

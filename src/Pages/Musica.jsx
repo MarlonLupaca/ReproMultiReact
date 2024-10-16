@@ -11,7 +11,7 @@ const Musica = () => {
     return (
         <>  
             <Cabecera/>
-            <main className='flex flex-col gap-2'>
+            <main className='flex flex-col gap-2 mb-[130px]'>
                 <Filtros/>
                 <span className='px-4 font-[500] text-[18px]'>Todos las musicas</span>
                 <div>
