@@ -11,7 +11,7 @@ const Video = () => {
     return (
         <>
             <Cabecera />
-            <main className='flex flex-col md:flex-row h-screen bg-black text-gray-200'>
+            <main className='flex flex-col md:flex-row h-screen bg-black text-gray-200  md:h-[550px] md:overflow-y-auto md:bg-[#212121] md:ml-[210px] border pb-[100px]'>
                 {/* Main Content */}
                 <div className='flex-1 p-6'>
                     <div className='flex justify-between items-center'>
@@ -80,6 +80,34 @@ const Video = () => {
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr className='bg-gray-900 hover:bg-gray-800'>
+                                    <td className='p-2'>1</td>
+                                    <td className='p-2'>Nombre Música</td>
+                                    <td className='p-2'>Playlist</td>
+                                    <td className='p-2'>Añadido hace 1 semana</td>
+                                    <td className='p-2'>3:15</td>
+                                </tr>
+                                <tr className='bg-gray-900 hover:bg-gray-800'>
+                                    <td className='p-2'>1</td>
+                                    <td className='p-2'>Nombre Música</td>
+                                    <td className='p-2'>Playlist</td>
+                                    <td className='p-2'>Añadido hace 1 semana</td>
+                                    <td className='p-2'>3:15</td>
+                                </tr>
+                                <tr className='bg-gray-900 hover:bg-gray-800'>
+                                    <td className='p-2'>1</td>
+                                    <td className='p-2'>Nombre Música</td>
+                                    <td className='p-2'>Playlist</td>
+                                    <td className='p-2'>Añadido hace 1 semana</td>
+                                    <td className='p-2'>3:15</td>
+                                </tr>
+                                <tr className='bg-gray-900 hover:bg-gray-800'>
+                                    <td className='p-2'>1</td>
+                                    <td className='p-2'>Nombre Música</td>
+                                    <td className='p-2'>Playlist</td>
+                                    <td className='p-2'>Añadido hace 1 semana</td>
+                                    <td className='p-2'>3:15</td>
+                                </tr>
                                 <tr className='bg-gray-900 hover:bg-gray-800'>
                                     <td className='p-2'>1</td>
                                     <td className='p-2'>Nombre Música</td>
