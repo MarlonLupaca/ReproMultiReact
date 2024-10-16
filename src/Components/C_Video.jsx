@@ -8,6 +8,7 @@ const C_Video = () => {
                 h-full rounded-[5px]' />
                 <div className='grid grid-cols-2 grid-rows-2'>
                     <span className=' col-span-2 text-[16px]'>Nombre del video</span>
+                    <span className=' col-span-2 text-[16px]'>Autor</span>
                     <span className='text-[13px] text-[#b8b8b8]'>Tamaño</span>
                     <span className='text-[13px] text-[#b8b8b8]'>Fecha</span>
                 </div>
