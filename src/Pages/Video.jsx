@@ -1,9 +1,11 @@
+
 import React from 'react';
 import Filtros from '../Components/Filtros';
 import C_Video from '../Components/C_Video';
 import Cabecera from '../Components/Cabecera';
 import ContenedorMusica from "../Components/ContenedorMusica";
 import Navegador from "../Components/Navegador";
+import MusicPlayer from '../Components/MusicPlayer'
 
 const Video = () => {
     return (
@@ -91,8 +93,9 @@ const Video = () => {
                 </div>
             </main>
 
-            <ContenedorMusica />
-            <Navegador />
+            <ContenedorMusica/>
+            <MusicPlayer/>
+            <Navegador/>
         </>
     );
 }
