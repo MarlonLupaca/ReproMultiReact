@@ -14,7 +14,7 @@ const Musica = () => {
             <Cabecera/>
             <main className='flex flex-col gap-2 md:h-[550px] md:overflow-y-auto md:bg-[#212121] md:ml-[210px]'>
                 <Filtros/>
-                <span className='px-4 font-[500] text-[18px]'>Todos las musicas</span>
+                <span className='px-4 font-[500] text-[18px]'>Todos las musicas de Alex</span>
                 <div>
                     <C_Musica name = "Musica_general"/>
                     <C_Musica name = "Musica_general_2"/>
