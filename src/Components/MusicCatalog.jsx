@@ -1,49 +1,58 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const MusicCatalog = () => {
-    const musicData = [
-        { id: 1, name: 'Nombre Música', author: 'Autor', playlist: 'PlayList', date: 'Añadido hace 1 semana' },
-        { id: 2, name: 'Nombre Música', author: 'Autor', playlist: 'Nombre álbum', date: 'Añadido hace 1 semana' },
-        { id: 3, name: 'Nombre Música', author: 'Autor', playlist: 'Nombre álbum', date: 'Añadido hace 1 semana' },
-        { id: 4, name: 'Nombre Música', author: 'Autor', playlist: 'Nombre álbum', date: 'Añadido hace 1 semana' },
-        { id: 5, name: 'Nombre Música', author: 'Autor', playlist: 'Nombre álbum', date: 'Añadido hace 1 semana' },
-    ];
+    const [usuarios, setUsuarios] = useState([]);
 
+    const fetchUsuarios = async () => {
+        try {
+            const response = await fetch("http://localhost:8080/api/allUsers");
+            const data = await response.json();
+            setUsuarios(data);
+        } catch (error) {
+            console.error("Error fetching users:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchUsuarios();
+    }, []);
+
+    useEffect(() => {
+        if (usuarios.length > 0) {
+            console.log('Usuarios actualizados:', usuarios);
+        }
+    }, [usuarios]);
+    
     return (
         <div className="p-6 text-white">
-        <h2 className="text-2xl font-bold mb-4">Catálogo de música</h2>
-        <table className="w-full table-auto text-left">
+        <h2 className="text-2xl font-bold mb-4">Usuarios</h2>
+        <table className="w-[1100px] table-auto text-left m-auto">
             <thead>
             <tr className="bg-gray-700">
                 <th className="p-2">ID</th>
                 <th className="p-2">Nombre</th>
-                <th className="p-2">PlayList</th>
-                <th className="p-2">Fecha en que se añadió</th>
+                <th className="p-2">Email</th>
+                <th className="p-2">Contraseña</th>
                 <th className="p-2">Acciones</th>
             </tr>
             </thead>
             <tbody>
-            {musicData.map((track) => (
-                <tr key={track.id} className="border-b border-gray-600">
-                <td className="p-2">{track.id}</td>
-                <td className="p-2">
-                    <div className="flex flex-col">
-                    <span className="font-semibold">{track.name}</span>
-                    <span className="text-sm text-gray-400">{track.author}</span>
-                    </div>
-                </td>
-                <td className="p-2">{track.playlist}</td>
-                <td className="p-2">{track.date}</td>
-                <td className="p-2">
-                    <div className="flex space-x-2">
-                    <button className="text-lg text-white hover:text-red-500">
-                        <i className="fa-solid fa-trash"></i>
-                    </button>
-                    <button className="text-lg text-white hover:text-green-500">
-                        <i className="fa-solid fa-pen"></i>
-                    </button>
-                    </div>
-                </td>
+            {usuarios.map((track) => (
+                <tr key={track.idUsuario} className="border-b border-gray-600">
+                    <td className="p-2">{track.idUsuario}</td>
+                    <td className="p-2">{track.nombre}</td>
+                    <td className="p-2">{track.email}</td>
+                    <td className="p-2">{track.contraseña}</td>
+                    <td className="p-2">
+                        <div className="flex space-x-2">
+                        <button className="text-lg text-white hover:text-red-500">
+                            <i className="fa-solid fa-trash"></i>
+                        </button>
+                        <button className="text-lg text-white hover:text-green-500">
+                            <i className="fa-solid fa-pen"></i>
+                        </button>
+                        </div>
+                    </td>
                 </tr>
             ))}
             </tbody>

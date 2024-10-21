@@ -14,7 +14,7 @@ const C_Video = () => {
                 </div>
                 
             </div>
-            <i class="fa-solid fa-ellipsis-vertical text-[20px] text-[#ededed]"></i>
+            <i className="fa-solid fa-ellipsis-vertical text-[20px] text-[#ededed]"></i>
         </div>
     )
 }
