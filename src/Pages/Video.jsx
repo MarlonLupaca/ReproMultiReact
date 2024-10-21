@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Filtros from '../Components/Filtros';
 import C_Video from '../Components/C_Video';
@@ -11,17 +10,16 @@ const Video = () => {
     return (
         <>
             <Cabecera />
-            <main className='flex flex-col md:flex-row h-screen bg-black text-gray-200  md:h-[550px] md:overflow-y-auto md:bg-[#212121] md:ml-[210px] border pb-[100px]'>
-                {/* Main Content */}
+            <main className='flex flex-col md:flex-row h-screen bg-black text-gray-200 md:h-[550px] md:overflow-y-auto md:bg-[#212121] md:ml-[210px] pb-[100px] rounded-lg'>
+            {/* Main Content */}
                 <div className='flex-1 p-6'>
                     <div className='flex justify-between items-center'>
                         <input
                             type="text"
                             placeholder="Busca algún título"
-                            className='bg-[#454444] text-gray-300 w-1/2 p-2 rounded-md placeholder-[#b6b6b6]'
+                            className='bg-[#454444] text-gray-300 w-1/2 p-2 rounded-md placeholder-[#b6b6b6] border-none outline-none'
                         />
                     </div>
-
 
                     <div className='mt-6'>
                         <h2 className='text-xl font-bold text-gray-300'>Categorías más escuchadas</h2>
@@ -33,11 +31,9 @@ const Video = () => {
                             <button className='bg-[#454444] px-4 py-2 rounded-md hover:bg-gray-700'>Salsa</button>
                             <button className='bg-[#454444] px-4 py-2 rounded-md hover:bg-gray-700'>Bachata</button>
                             <button className='bg-[#454444] px-4 py-2 rounded-md hover:bg-gray-700'>Metal</button>
-                            {/* Botón Mostrar Todos */}
                             <button className='bg-[#454444] px-4 py-2 rounded-md text-[#b6b6b6] hover:bg-gray-700'>
                                 Mostrar todos
                             </button>
-
                         </div>
                     </div>
 
@@ -45,22 +41,22 @@ const Video = () => {
                         <h2 className='text-xl font-bold text-gray-300'>Escuchados recientemente</h2>
                         <div className='grid grid-cols-2 md:grid-cols-4 gap-4 mt-4'>
                             <div className='p-4'>
-                                <img src='https://i.ytimg.com/vi/hTWKbfoikeg/maxresdefault.jpg' alt='Video Thumbnail' className='w-full h-32 object-cover rounded-lg' />
+                                <img src='https://i.ytimg.com/vi/hTWKbfoikeg/maxresdefault.jpg' alt='Video Thumbnail' className='w-full h-32 object-cover rounded-lg border-none' />
                                 <p className='mt-2 text-gray-200 font-semibold'>Nombre música</p>
                                 <span className='text-gray-500 text-sm'>Autor</span>
                             </div>
                             <div className='p-4'>
-                                <img src='https://n9.cl/ef04t' alt='Video Thumbnail' className='w-full h-32 object-cover rounded-lg' />
+                                <img src='https://n9.cl/ef04t' alt='Video Thumbnail' className='w-full h-32 object-cover rounded-lg border-none' />
                                 <p className='mt-2 text-gray-200 font-semibold'>Nombre música</p>
                                 <span className='text-gray-500 text-sm'>Autor</span>
                             </div>
                             <div className='p-4'>
-                                <img src='https://i.ytimg.com/vi/QFs3PIZb3js/maxresdefault.jpg' alt='Video Thumbnail' className='w-full h-32 object-cover rounded-lg' />
+                                <img src='https://i.ytimg.com/vi/QFs3PIZb3js/maxresdefault.jpg' alt='Video Thumbnail' className='w-full h-32 object-cover rounded-lg border-none' />
                                 <p className='mt-2 text-gray-200 font-semibold'>Nombre música</p>
                                 <span className='text-gray-500 text-sm'>Autor</span>
                             </div>
                             <div className='p-4'>
-                                <img src='https://i.ytimg.com/vi/60ItHLz5WEA/maxresdefault.jpg' alt='Video Thumbnail' className='w-full h-32 object-cover rounded-lg' />
+                                <img src='https://i.ytimg.com/vi/60ItHLz5WEA/maxresdefault.jpg' alt='Video Thumbnail' className='w-full h-32 object-cover rounded-lg border-none' />
                                 <p className='mt-2 text-gray-200 font-semibold'>Nombre música</p>
                                 <span className='text-gray-500 text-sm'>Autor</span>
                             </div>
@@ -88,28 +84,28 @@ const Video = () => {
                                     <td className='p-2'>3:15</td>
                                 </tr>
                                 <tr className='bg-gray-900 hover:bg-gray-800'>
-                                    <td className='p-2'>1</td>
+                                    <td className='p-2'>2</td>
                                     <td className='p-2'>Nombre Música</td>
                                     <td className='p-2'>Playlist</td>
                                     <td className='p-2'>Añadido hace 1 semana</td>
                                     <td className='p-2'>3:15</td>
                                 </tr>
                                 <tr className='bg-gray-900 hover:bg-gray-800'>
-                                    <td className='p-2'>1</td>
+                                    <td className='p-2'>3</td>
                                     <td className='p-2'>Nombre Música</td>
                                     <td className='p-2'>Playlist</td>
                                     <td className='p-2'>Añadido hace 1 semana</td>
                                     <td className='p-2'>3:15</td>
                                 </tr>
                                 <tr className='bg-gray-900 hover:bg-gray-800'>
-                                    <td className='p-2'>1</td>
+                                    <td className='p-2'>4</td>
                                     <td className='p-2'>Nombre Música</td>
                                     <td className='p-2'>Playlist</td>
                                     <td className='p-2'>Añadido hace 1 semana</td>
                                     <td className='p-2'>3:15</td>
                                 </tr>
                                 <tr className='bg-gray-900 hover:bg-gray-800'>
-                                    <td className='p-2'>1</td>
+                                    <td className='p-2'>5</td>
                                     <td className='p-2'>Nombre Música</td>
                                     <td className='p-2'>Playlist</td>
                                     <td className='p-2'>Añadido hace 1 semana</td>
@@ -120,12 +116,10 @@ const Video = () => {
                     </div>
                 </div>
             </main>
-
-            <ContenedorMusica/>
-            <MusicPlayer/>
-            <Navegador/>
+            <ContenedorMusica />
+            <MusicPlayer />
+            <Navegador />
         </>
     );
 }
-
 export default Video;
