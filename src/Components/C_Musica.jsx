@@ -13,7 +13,7 @@ const C_Musica = ({ name }) => {
                     <span className='text-[13px] text-[#b8b8b8]'>Fecha</span>
                 </div>
             </div>
-            <i class="fa-solid fa-ellipsis-vertical text-[20px] text-[#ededed]"></i>
+            <i className="fa-solid fa-ellipsis-vertical text-[20px] text-[#ededed]"></i>
         </div>
     )
 }
