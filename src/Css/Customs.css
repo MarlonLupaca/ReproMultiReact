@@ -39,6 +39,10 @@ input:focus{
 .movimiento{
     animation: girar 5s linear infinite;
 }
+.Box_personalizado:hover {
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
+}
+
 
 @keyframes girar {
     0% {
