@@ -43,6 +43,10 @@ input:focus{
     box-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
 }
 
+.grid_table{
+    display: grid;
+    grid-template-columns: 60px 2fr 1fr 120px;
+}
 
 @keyframes girar {
     0% {
