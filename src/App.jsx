@@ -9,6 +9,7 @@ import Musica from "./Pages/Musica";
 import Descarga from "./Pages/Descarga";
 import Login from "./Pages/Login";
 import Admin from "./Pages/Admin";
+import Registrarse from "./Pages/Registrarse";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/Musica" element={<Musica/>}/>
         <Route path="/Descarga" element={<Descarga/>}/>
         <Route path="/Admin" element={<Admin/>}/>
+        <Route path="/Registrarse" element={<Registrarse/>}/>
       </Routes>
       
     </HashRouter>

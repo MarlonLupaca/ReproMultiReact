@@ -13,9 +13,9 @@ const ContenedorMusica = () => {
                     </div>
                 </div>
                 <div className='h-full flex items-center gap-5 text-[22px] mr-[15px]'>
-                    <i class="fa-solid fa-play"></i>
-                    <i class="fa-solid fa-pause"></i>
-                    <i class="fa-solid fa-heart"></i>
+                    <i className="fa-solid fa-play"></i>
+                    <i className="fa-solid fa-pause"></i>
+                    <i className="fa-solid fa-heart"></i>
                 </div>
             </div>
 
