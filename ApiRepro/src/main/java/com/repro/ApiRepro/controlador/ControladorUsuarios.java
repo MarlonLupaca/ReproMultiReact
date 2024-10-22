@@ -36,9 +36,16 @@ public class ControladorUsuarios {
     }
     
     @PostMapping("/usuarios")
-    public Usuario createUsuario(@RequestBody Usuario usuario) {
-        return usuarioRepositorio.save(usuario);
+    public ResponseEntity<Boolean> createUsuario(@RequestBody Usuario usuario) {
+        try {
+            Usuario nuevoUsuario = usuarioRepositorio.save(usuario);
+            return ResponseEntity.ok(true);
+        } catch (Exception e) {
+            return ResponseEntity.ok(false);
+        }
     }
+
+
 
     // Actualizar un usuario por ID
     @PutMapping("/usuarios/{id}")
