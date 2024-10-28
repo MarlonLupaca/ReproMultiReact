@@ -23,4 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
+# Ignorar archivos de audio y video
 *.mp3
+*.mp4
