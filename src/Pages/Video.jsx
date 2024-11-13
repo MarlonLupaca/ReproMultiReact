@@ -1,37 +1,77 @@
-import React, { useState } from 'react';
-import Filtros from '../Components/Filtros';
-import C_Video from '../Components/C_Video';
+import React, { useState, useEffect } from 'react';
 import Cabecera from '../Components/Cabecera';
 import ContenedorMusica from "../Components/ContenedorMusica";
 import Navegador from "../Components/Navegador";
-import MusicPlayer from '../Components/MusicPlayer';
+import MusicPlayerVideo from '../Components/MusicPlayerVideo';
 
 const Video = () => {
     const [showAllCategories, setShowAllCategories] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const [playlist, setPlaylist] = useState([
+        {
+            url: 'https://www.youtube.com/watch?v=hTWKbfoikeg',
+            titulo: 'Smells Like Teen Spirit',
+            autor: 'Nirvana',
+            duracion: '5:01'
+        },
+        {
+            url: 'https://www.youtube.com/watch?v=QFs3PIZb3js',
+            titulo: 'Propuesta indecente',
+            autor: 'Romeo Santos',
+            duracion: '4:28'
+        },
+        {
+            url: 'https://youtu.be/3YxaaGgTQYM?si=rW-a-9XVNSzpSXo9',
+            titulo: 'Bring Me To Life',
+            autor: 'Evanescence',
+            duracion: '4:13'
+        },
+        {
+            url: 'https://youtu.be/60ItHLz5WEA?si=CrLDtfvItFATapnn',
+            titulo: 'Faded',
+            autor: 'Alan Walker',
+            duracion: '3:32'
+        }
+    ]);
+    const [currentTrack, setCurrentTrack] = useState(null);
+
+    useEffect(() => {
+        // Fetch para capturar los archivos multimedias de la API
+        fetch('http://localhost:8080/multimedias/allMultimedias')
+            .then(response => response.json())
+            .then(data => setPlaylist(data))
+            .catch(error => console.error('Error fetching multimedia:', error));
+    }, []);
 
     const handleShowAllCategories = () => {
         if (!showAllCategories) {
             setShowAllCategories(true);
-            setTimeout(() => setIsOpen(true), 50); // Efecto de apertura
+            setTimeout(() => setIsOpen(true), 50); 
         } else {
             setIsOpen(false);
-            setTimeout(() => setShowAllCategories(false), 300); // Tiempo para cerrar suavemente
+            setTimeout(() => setShowAllCategories(false), 300); 
         }
     };
 
     const handleBackgroundClick = (e) => {
-        // Si el clic fue en el fondo y no en el recuadro, se cierra categorías
         if (e.target.id === 'background') {
             handleShowAllCategories();
         }
+    };
+
+    const handleTrackClick = (track) => {
+        setCurrentTrack(track);
+    };
+
+    const getYouTubeThumbnail = (url) => {
+        const videoId = url.split('v=')[1];
+        return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
     };
 
     return (
         <>
             <Cabecera />
             <main className='flex flex-col md:flex-row h-screen bg-black text-gray-200 md:h-[550px] md:overflow-y-auto md:bg-[#212121] md:ml-[210px] pb-[100px] rounded-lg'>
-                {/* Main Content */}
                 <div className='flex-1 p-6'>
                     <div className='flex justify-between items-center'>
                         <input
@@ -58,32 +98,11 @@ const Video = () => {
                     <div className='mt-6'>
                         <h2 className='text-xl font-bold text-[#e2e2e2]'>Escuchados recientemente</h2>
                         <div className='grid grid-cols-2 md:grid-cols-4 gap-4 mt-4'>
-                            {[
-                                {
-                                    src: 'https://i.ytimg.com/vi/hTWKbfoikeg/maxresdefault.jpg',
-                                    title: 'Nombre música',
-                                    author: 'Autor'
-                                },
-                                {
-                                    src: 'https://n9.cl/ef04t',
-                                    title: 'Nombre música',
-                                    author: 'Autor'
-                                },
-                                {
-                                    src: 'https://i.ytimg.com/vi/QFs3PIZb3js/maxresdefault.jpg',
-                                    title: 'Nombre música',
-                                    author: 'Autor'
-                                },
-                                {
-                                    src: 'https://i.ytimg.com/vi/60ItHLz5WEA/maxresdefault.jpg',
-                                    title: 'Nombre música',
-                                    author: 'Autor'
-                                }
-                            ].map((video, index) => (
-                                <div key={index} className='p-4 transition-transform transform hover:scale-105'>
-                                    <img src={video.src} alt='Video Thumbnail' className='w-full h-36 object-cover rounded-lg border-none transition-opacity duration-300 hover:opacity-70' />
-                                    <p className='mt-2 text-gray-200 font-semibold'>{video.title}</p>
-                                    <span className='text-gray-500 text-sm'>{video.author}</span>
+                            {playlist.map((video, index) => (
+                                <div key={index} className='p-4 transition-transform transform hover:scale-105 cursor-pointer' onClick={() => handleTrackClick(video)}>
+                                    <img src={getYouTubeThumbnail(video.url)} alt='Video Thumbnail' className='w-full h-36 object-cover rounded-lg border-none transition-opacity duration-300 hover:opacity-70' />
+                                    <p className='mt-2 text-gray-200 font-semibold'>{video.titulo}</p>
+                                    <span className='text-gray-500 text-sm'>{video.duracion}</span>
                                 </div>
                             ))}
                         </div>
@@ -102,28 +121,18 @@ const Video = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {[
-                                    { title: 'Nombre Música', author: 'Autor', added: 'Añadido hace 1 semana', duration: '3:15', src: 'https://i.ytimg.com/vi/hTWKbfoikeg/maxresdefault.jpg' },
-                                    { title: 'Nombre Música', author: 'Autor', added: 'Añadido hace 1 semana', duration: '3:15', src: 'https://n9.cl/ef04t' },
-                                    { title: 'Nombre Música', author: 'Autor', added: 'Añadido hace 1 semana', duration: '3:15', src: 'https://i.ytimg.com/vi/QFs3PIZb3js/maxresdefault.jpg' },
-                                    { title: 'Nombre Música', author: 'Autor', added: 'Añadido hace 1 semana', duration: '3:15', src: 'https://i.ytimg.com/vi/60ItHLz5WEA/maxresdefault.jpg' },
-                                ].map((video, index) => (
-                                    <tr key={index} className='bg-gray-900 hover:bg-gray-800 transition-colors duration-150'>
+                                {playlist.map((video, index) => (
+                                    <tr key={index} className='bg-gray-900 hover:bg-gray-800 transition-colors duration-150 cursor-pointer' onClick={() => handleTrackClick(video)}>
                                         <td className='p-4'>{index + 1}</td>
                                         <td className='p-4 flex items-center'>
-                                            <img
-                                                src={video.src}
-                                                alt='Video Thumbnail'
-                                                className='w-32 h-20 object-cover mr-4 rounded-md'
-                                            />
+                                            <img src={getYouTubeThumbnail(video.url)} alt='Video Thumbnail' className='w-32 h-20 object-cover mr-4 rounded-md' />
                                             <div>
-                                                <p className='text-gray-200 font-semibold'>{video.title}</p>
-                                                <span className='text-gray-500 text-sm'>{video.author}</span>
+                                                <p className='text-gray-200 font-semibold'>{video.titulo}</p>
                                             </div>
                                         </td>
                                         <td className='p-4'>Playlist</td>
-                                        <td className='p-4'>{video.added}</td>
-                                        <td className='p-4'>{video.duration}</td>
+                                        <td className='p-4'>Añadido recientemente</td>
+                                        <td className='p-4'>{video.duracion}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -132,15 +141,11 @@ const Video = () => {
                 </div>
             </main>
             <ContenedorMusica />
-            <MusicPlayer />
             <Navegador />
-            {/* Ventana emergente de categorías */}
+            <MusicPlayerVideo currentTrack={currentTrack} setCurrentTrack={setCurrentTrack} playlist={playlist} />
+
             {showAllCategories && (
-                <div
-                    id="background"
-                    onClick={handleBackgroundClick}
-                    className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center transition-opacity duration-300 ease-in-out'
-                >
+                <div id="background" onClick={handleBackgroundClick} className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center transition-opacity duration-300 ease-in-out'>
                     <div className={`bg-[#212121] p-6 rounded-lg w-1/3 transform transition-transform duration-300 ease-in-out ${isOpen ? 'scale-100' : 'scale-0'}`}>
                         <h3 className='text-xl text-[#e2e2e2] font-bold mb-4'>Más Categorías</h3>
                         <div className='flex flex-wrap gap-2'>
