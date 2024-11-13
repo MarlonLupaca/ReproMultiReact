@@ -12,7 +12,6 @@ const MusicPlayer = forwardRef((props, ref) => {
     const [url, seturl] = useState("Sin Cancion")
 
     const reproducir = async (nombre, url) => {
-       
         await setnombre(nombre);
         await seturl(url)
         await togglePlayPause();
@@ -59,7 +58,7 @@ const MusicPlayer = forwardRef((props, ref) => {
     };
 
     return (
-        <div className=" grid_cancion bg-black p-4 rounded-lg shadow-lg w-full">
+        <div className=" grid_cancion fixed bottom-0 bg-black p-4 rounded-lg shadow-lg w-full">
             <div className="flex items-center">
                 <div className="w-[50px] h-[50px] rounded-full mr-4 flex justify-center items-center"> 
                     <img src="Logo_pri.svg" alt="logo_default" />
