@@ -3,7 +3,10 @@
 ### 2. Registrarse
 ### 3. Gestionar usuarios
 ### 4. Reproducir contenido
+### 5. Gestionar Playlists
+### 6. Gestionar Perfil
+### 7. Buscar Contenido
 
-<img src="https://private-user-images.githubusercontent.com/105674967/378229971-7cd47359-8ba8-4ed1-9a86-c2fd7e32a012.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzAwNzk0MDcsIm5iZiI6MTczMDA3OTEwNywicGF0aCI6Ii8xMDU2NzQ5NjcvMzc4MjI5OTcxLTdjZDQ3MzU5LThiYTgtNGVkMS05YTg2LWMyZmQ3ZTMyYTAxMi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMDI4JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTAyOFQwMTMxNDdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1kMzU3NjUyZjAzZTUwNzQyNTlkMTVhZmFhYjMwZDcyMDQ0MjJmN2JkOGUyNmY2ZmNmZjUyNzc4M2ViMzZkMzYwJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.ZlK7yMyCpKfkhcMP2boH0cmcDZZGMvc3vJJgBX-ZKbk">
+![casos_de_uso drawio](https://github.com/user-attachments/assets/7cd47359-8ba8-4ed1-9a86-c2fd7e32a012)
 
 ### La ruta de la documentacion "ReproMultiReact\ApiRepro\target\site\apidocs"
