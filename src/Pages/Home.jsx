@@ -11,12 +11,11 @@ const Home = () => {
     return (
         <>
             <Cabecera/>
-            <main className="flex flex-col gap-10 py-4 md:ml-[210px] md:h-[550px] md:overflow-y-auto md:bg-[#212121]">
+            <main className="rounded-lg flex flex-col gap-10 py-4 md:ml-[210px] md:h-[580px] md:overflow-y-auto md:bg-[#212121] border-green-600">
                 <Caja_Recientes cancion="cancion1"/> 
                 <input type="file" name="" id="" className='hidden' />
                 <Caja_Archivos/>
             </main>
-            <ContenedorMusica/>
             <MusicPlayer/>
             <Navegador/>
         </>

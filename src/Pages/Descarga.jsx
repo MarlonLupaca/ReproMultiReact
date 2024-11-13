@@ -11,7 +11,7 @@ const Descarga = () => {
     return (
         <>
             <Cabecera/>
-            <main className='flex flex-col gap-5 md:h-[550px] md:overflow-y-auto md:bg-[#212121] md:ml-[210px]'>
+            <main className='flex flex-col gap-5 rounded-lg md:h-[580px] md:overflow-y-auto md:bg-[#212121] md:ml-[210px]'>
                 <span className='px-4 font-[500] text-[18px] mt-2'>Descargar contenido</span>
                 <C_input/>
                 <C_eleccion/>

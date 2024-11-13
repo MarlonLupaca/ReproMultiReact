@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const Navegador = () => {
     return (
-        <div className="fixed items-center bottom-0 w-full h-[60px] fondo_gradiente md:bg-[#212121] md:w-[200px] md:top-[60px] md:h-[550px] md:rounded-tr-lg md:rounded-br-lg md:pl-6 md:py-6">
+        <div className="border-green-700 fixed items-center bottom-0 w-full h-[60px] fondo_gradiente md:bg-[#212121] md:w-[200px] md:top-[60px] md:h-[580px] md:rounded-tr-lg md:rounded-br-lg md:pl-6 md:py-6">
             <nav className="h-full pt-1">
                 <ul className="flex justify-evenly h-full items-center md:flex-col md:items-start md:justify-normal md:gap-6">
                     <Link to="/Home" className="w-20">

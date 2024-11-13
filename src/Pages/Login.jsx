@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { notify, notifyWarn } from '../Func/Funciones.js';
+import { useUser } from '../context/ContextoGlobal.jsx';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
@@ -9,6 +10,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
     const navigate = useNavigate();
+    const { setUsuario } = useUser();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -19,13 +21,14 @@ const Login = () => {
                 const response = await fetch(`http://localhost:8080/api/usuarios/login/${email}/${password}`)
                 const data = await response.json();
                 console.log(data)
-                if (data === true) {
+                if (data != null ) {
+                    setUsuario(data);
                     navigate('/Home');     
                 } else {
                     notifyWarn("Usuario o contraseña incorrecta!");
                 }
             } catch (error) {
-                notifyWarn("Error con el servidor!");
+                notifyWarn("Usuario o contraseña incorrecta!");
             }
             
             {/* */}
