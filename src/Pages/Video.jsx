@@ -9,25 +9,25 @@ const Video = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [playlist, setPlaylist] = useState([
         {
-            url: 'https://www.youtube.com/watch?v=hTWKbfoikeg',
+            url: 'http://localhost:8080/01_smells_like_teen_spirit.mp4',
             titulo: 'Smells Like Teen Spirit',
             autor: 'Nirvana',
-            duracion: '5:01'
+            duracion: '4:38'
         },
         {
-            url: 'https://www.youtube.com/watch?v=QFs3PIZb3js',
+            url: 'http://localhost:8080/02_propuesta_indecente.mp4',
             titulo: 'Propuesta indecente',
             autor: 'Romeo Santos',
             duracion: '4:28'
         },
         {
-            url: 'https://youtu.be/3YxaaGgTQYM?si=rW-a-9XVNSzpSXo9',
+            url: 'http://localhost:8080/03_bring_me_to_life.mp4',
             titulo: 'Bring Me To Life',
             autor: 'Evanescence',
             duracion: '4:13'
         },
         {
-            url: 'https://youtu.be/60ItHLz5WEA?si=CrLDtfvItFATapnn',
+            url: 'http://localhost:8080/04_faded.mp4',
             titulo: 'Faded',
             autor: 'Alan Walker',
             duracion: '3:32'
@@ -63,10 +63,11 @@ const Video = () => {
         setCurrentTrack(track);
     };
 
-    const getYouTubeThumbnail = (url) => {
-        const videoId = url.split('v=')[1];
-        return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-    };
+    const getVideoThumbnail = (url) => {
+        // Asumimos que tienes una carpeta con miniaturas locales
+        const videoId = url.split('/').pop().split('.')[0];  // Extrae el nombre del video sin la extensión
+        return `http://localhost:8080/thumbnails/${videoId}.jpg`; // Cambia la extensión a la imagen de miniatura
+    };    
 
     return (
         <>
@@ -100,7 +101,7 @@ const Video = () => {
                         <div className='grid grid-cols-2 md:grid-cols-4 gap-4 mt-4'>
                             {playlist.map((video, index) => (
                                 <div key={index} className='p-4 transition-transform transform hover:scale-105 cursor-pointer' onClick={() => handleTrackClick(video)}>
-                                    <img src={getYouTubeThumbnail(video.url)} alt='Video Thumbnail' className='w-full h-36 object-cover rounded-lg border-none transition-opacity duration-300 hover:opacity-70' />
+                                    <img src={getVideoThumbnail(video.url)} alt='Video Thumbnail' className='w-full h-36 object-cover rounded-lg border-none transition-opacity duration-300 hover:opacity-70' />
                                     <p className='mt-2 text-gray-200 font-semibold'>{video.titulo}</p>
                                     <span className='text-gray-500 text-sm'>{video.duracion}</span>
                                 </div>
@@ -125,7 +126,7 @@ const Video = () => {
                                     <tr key={index} className='bg-gray-900 hover:bg-gray-800 transition-colors duration-150 cursor-pointer' onClick={() => handleTrackClick(video)}>
                                         <td className='p-4'>{index + 1}</td>
                                         <td className='p-4 flex items-center'>
-                                            <img src={getYouTubeThumbnail(video.url)} alt='Video Thumbnail' className='w-32 h-20 object-cover mr-4 rounded-md' />
+                                            <img src={getVideoThumbnail(video.url)} alt='Video Thumbnail' className='w-32 h-20 object-cover mr-4 rounded-md' />
                                             <div>
                                                 <p className='text-gray-200 font-semibold'>{video.titulo}</p>
                                             </div>
