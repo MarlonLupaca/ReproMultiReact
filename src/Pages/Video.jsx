@@ -7,41 +7,33 @@ import MusicPlayerVideo from '../Components/MusicPlayerVideo';
 const Video = () => {
     const [showAllCategories, setShowAllCategories] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
-    const [playlist, setPlaylist] = useState([
-        {
-            url: 'http://localhost:8080/01_smells_like_teen_spirit.mp4',
-            titulo: 'Smells Like Teen Spirit',
-            autor: 'Nirvana',
-            duracion: '4:38'
-        },
-        {
-            url: 'http://localhost:8080/02_propuesta_indecente.mp4',
-            titulo: 'Propuesta indecente',
-            autor: 'Romeo Santos',
-            duracion: '4:28'
-        },
-        {
-            url: 'http://localhost:8080/03_bring_me_to_life.mp4',
-            titulo: 'Bring Me To Life',
-            autor: 'Evanescence',
-            duracion: '4:13'
-        },
-        {
-            url: 'http://localhost:8080/04_faded.mp4',
-            titulo: 'Faded',
-            autor: 'Alan Walker',
-            duracion: '3:32'
-        }
-    ]);
+    const [playlist, setPlaylist] = useState([]);
+    const [filteredPlaylist, setFilteredPlaylist] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
     const [currentTrack, setCurrentTrack] = useState(null);
 
     useEffect(() => {
         // Fetch para capturar los archivos multimedias de la API
         fetch('http://localhost:8080/multimedias/allMultimedias')
             .then(response => response.json())
-            .then(data => setPlaylist(data))
+            .then(data => {
+                setPlaylist(data);
+                setFilteredPlaylist(data); // Inicializamos la lista filtrada con todos los videos
+            })
             .catch(error => console.error('Error fetching multimedia:', error));
     }, []);
+
+    useEffect(() => {
+        // Filtrar la playlist según el término de búsqueda
+        const filtered = playlist.filter(video =>
+            video.titulo.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        setFilteredPlaylist(filtered);
+    }, [searchQuery, playlist]);
+
+    const handleSearchChange = (e) => {
+        setSearchQuery(e.target.value);
+    };
 
     const handleShowAllCategories = () => {
         if (!showAllCategories) {
@@ -67,7 +59,7 @@ const Video = () => {
         // Asumimos que tienes una carpeta con miniaturas locales
         const videoId = url.split('/').pop().split('.')[0];  // Extrae el nombre del video sin la extensión
         return `http://localhost:8080/thumbnails/${videoId}.jpg`; // Cambia la extensión a la imagen de miniatura
-    };    
+    };
 
     return (
         <>
@@ -78,6 +70,8 @@ const Video = () => {
                         <input
                             type="text"
                             placeholder="Busca algún título"
+                            value={searchQuery}
+                            onChange={handleSearchChange}
                             className='bg-[#454444] text-gray-300 w-1/2 p-2 rounded-md placeholder-[#b6b6b6] border-none outline-none transition duration-200 focus:ring focus:ring-[rgb(248,73,108)]'
                         />
                     </div>
@@ -99,7 +93,7 @@ const Video = () => {
                     <div className='mt-6'>
                         <h2 className='text-xl font-bold text-[#e2e2e2]'>Escuchados recientemente</h2>
                         <div className='grid grid-cols-2 md:grid-cols-4 gap-4 mt-4'>
-                            {playlist.map((video, index) => (
+                            {filteredPlaylist.map((video, index) => (
                                 <div key={index} className='p-4 transition-transform transform hover:scale-105 cursor-pointer' onClick={() => handleTrackClick(video)}>
                                     <img src={getVideoThumbnail(video.url)} alt='Video Thumbnail' className='w-full h-36 object-cover rounded-lg border-none transition-opacity duration-300 hover:opacity-70' />
                                     <p className='mt-2 text-gray-200 font-semibold'>{video.titulo}</p>
@@ -122,7 +116,7 @@ const Video = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {playlist.map((video, index) => (
+                                {filteredPlaylist.map((video, index) => (
                                     <tr key={index} className='bg-gray-900 hover:bg-gray-800 transition-colors duration-150 cursor-pointer' onClick={() => handleTrackClick(video)}>
                                         <td className='p-4'>{index + 1}</td>
                                         <td className='p-4 flex items-center'>
