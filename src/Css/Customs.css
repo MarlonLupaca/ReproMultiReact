@@ -45,7 +45,28 @@ input:focus{
 
 .grid_table{
     display: grid;
-    grid-template-columns: 60px 2fr 1fr 120px;
+    grid-template-columns: 60px 2fr 1fr 120px 120px;
+}
+
+.grid_table_usuario{
+    display: grid;
+    grid-template-columns: 60px 1fr 1.1fr 1fr 120px;
+}
+
+.error_caja{
+    border: 2px solid rgba(255, 0, 0, 0.673);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.673);
+
+}
+
+.texto_puntos{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.grid_cancion{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 @keyframes girar {

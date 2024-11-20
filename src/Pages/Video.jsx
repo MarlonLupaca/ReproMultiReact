@@ -11,8 +11,7 @@ const Video = () => {
     return (
         <>
             <Cabecera />
-            <main className='flex flex-col md:flex-row h-screen bg-black text-gray-200  md:h-[550px] md:overflow-y-auto md:bg-[#212121] md:ml-[210px] pb-[100px]'>
-                {/* Main Content */}
+            <main className='rounded-lg flex flex-col md:flex-row bg-black text-gray-200  md:h-[580px] md:overflow-y-auto md:bg-[#212121] md:ml-[210px] pb-[100px]'>
                 <div className='flex-1 p-6'>
                     <div className='flex justify-between items-center'>
                         <input
@@ -33,7 +32,6 @@ const Video = () => {
                             <button className='bg-[#454444] px-4 py-2 rounded-md hover:bg-gray-700'>Salsa</button>
                             <button className='bg-[#454444] px-4 py-2 rounded-md hover:bg-gray-700'>Bachata</button>
                             <button className='bg-[#454444] px-4 py-2 rounded-md hover:bg-gray-700'>Metal</button>
-                            {/* Botón Mostrar Todos */}
                             <button className='bg-[#454444] px-4 py-2 rounded-md text-[#b6b6b6] hover:bg-gray-700'>
                                 Mostrar todos
                             </button>
