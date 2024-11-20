@@ -10,6 +10,8 @@ import Descarga from "./Pages/Descarga";
 import Login from "./Pages/Login";
 import Admin from "./Pages/Admin";
 import Registrarse from "./Pages/Registrarse";
+import { UserProvider } from "./context/ContextoGlobal";
+import Gestion from "./Pages/Gestion";
 
 
 function App() {
@@ -17,19 +19,23 @@ function App() {
 
   return (
     <>
-    <HashRouter>
-      
-      <Routes>
-        <Route path="/" element={<Login/>}/>
-        <Route path="/Home" element={<Home/>}/>
-        <Route path="/Video" element={<Video/>}/>
-        <Route path="/Musica" element={<Musica/>}/>
-        <Route path="/Descarga" element={<Descarga/>}/>
-        <Route path="/Admin" element={<Admin/>}/>
-        <Route path="/Registrarse" element={<Registrarse/>}/>
-      </Routes>
-      
-    </HashRouter>
+    
+      <HashRouter>
+        
+        <Routes>
+          <Route path="/" element={<Login/>}/>
+          <Route path="/Home" element={<Home/>}/>
+          <Route path="/Video" element={<Video/>}/>
+          <Route path="/Musica" element={<Musica/>}/>
+          <Route path="/Descarga" element={<Descarga/>}/>
+          <Route path="/Admin" element={<Admin/>}/>
+          <Route path="/Registrarse" element={<Registrarse/>}/>
+          <Route path="/Gestion" element={<Gestion/>}/>
+        </Routes>
+        
+      </HashRouter>
+    
+    
       
       
     </>

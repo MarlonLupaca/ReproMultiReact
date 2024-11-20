@@ -7,7 +7,7 @@ const Caja_Recientes = ({cancion}) => {
     // Muestra los primeros 6 componentes por defecto
     return (
         <div className='h-[5000px] w-full px-5'>
-            <div className=''>
+            <div className='flex justify-between py-3'>
                 <span className='text-[18px] font-[700]'>
                     Añadido recientemente
                 </span>

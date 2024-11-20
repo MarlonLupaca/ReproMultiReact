@@ -11,7 +11,7 @@ export const notify = () => toast.success('Registrador!', {
 });
 
 // Función para notificación de advertencia/error
-export const notifyWarn = () => toast.error('Fallido!', {
+export const notifyWarn = (mensaje) => toast.error(mensaje, {
     position: "top-right",
     autoClose: 5000,
     hideProgressBar: false,

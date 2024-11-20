@@ -1,2 +1,12 @@
-## Casos de uso del programa
-> ![casos_de_uso drawio](https://private-user-images.githubusercontent.com/105674967/378229971-7cd47359-8ba8-4ed1-9a86-c2fd7e32a012.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Mjk0NjQyNzUsIm5iZiI6MTcyOTQ2Mzk3NSwicGF0aCI6Ii8xMDU2NzQ5NjcvMzc4MjI5OTcxLTdjZDQ3MzU5LThiYTgtNGVkMS05YTg2LWMyZmQ3ZTMyYTAxMi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMDIwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTAyMFQyMjM5MzVaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0xYzc3YmZiYzA5ZTVjYjFjYzUzZjVlYmQ2YzNjOWI0ZDE5MmVhYjk5Nzc4M2FlYWRkMzhmMWQ4YTg1MDYzMmI2JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.DCCxfwRaxRWo87kzph5hgPex2xg1bKmmWc5kCOY7QcE)
+# Casos de uso del programa
+### 1. Iniciar sesion
+### 2. Registrarse
+### 3. Gestionar usuarios
+### 4. Reproducir contenido
+### 5. Gestionar Playlists
+### 6. Gestionar Perfil
+### 7. Buscar Contenido
+
+![casos_de_uso drawio](https://github.com/user-attachments/assets/7cd47359-8ba8-4ed1-9a86-c2fd7e32a012)
+
+### La ruta de la documentacion "ReproMultiReact\ApiRepro\target\site\apidocs"
