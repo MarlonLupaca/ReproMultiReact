@@ -21,6 +21,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.http.HttpStatus;
 
 import org.apache.commons.validator.routines.EmailValidator;
+import org.springframework.web.bind.annotation.PutMapping;
 
 /**
  * Controlador para manejar las operaciones relacionadas con los usuarios.
@@ -74,14 +75,15 @@ public class ControladorUsuarios {
      * @return una respuesta que indica si las credenciales son válidas
      */
     @GetMapping("/usuarios/login/{email}/{contraseña}")
-    public ResponseEntity<Boolean> loginUsuario(@PathVariable String email, @PathVariable String contraseña) {
+    public ResponseEntity<Usuario> loginUsuario(@PathVariable String email, @PathVariable String contraseña) {
         Optional<Usuario> usuarioOpt = usuarioRepositorio.findByEmailAndContraseña(email, contraseña);
         if (usuarioOpt.isPresent()) {
-            return ResponseEntity.ok(true); // Devuelve true si el usuario es encontrado
+            return ResponseEntity.ok(usuarioOpt.get());
         } else {
-            return ResponseEntity.ok(false); // Devuelve false si no se encuentra
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
+
 
     /**
      * Exporta la lista de usuarios a un archivo Excel.
@@ -96,13 +98,11 @@ public class ControladorUsuarios {
         try (Workbook workbook = new XSSFWorkbook()) {
             Sheet sheet = workbook.createSheet("Usuarios");
 
-            // Crear la fila de encabezado
             Row headerRow = sheet.createRow(0);
             headerRow.createCell(0).setCellValue("ID");
             headerRow.createCell(1).setCellValue("Nombre");
             headerRow.createCell(2).setCellValue("Email");
 
-            // Agregar los datos de cada usuario en las filas siguientes
             int rowNum = 1;
             for (Usuario usuario : usuarios) {
                 Row row = sheet.createRow(rowNum++);
@@ -111,7 +111,6 @@ public class ControladorUsuarios {
                 row.createCell(2).setCellValue(usuario.getEmail());
             }
 
-            // Guardar el archivo en la ruta especificada
             try (FileOutputStream fileOut = new FileOutputStream(filePath)) {
                 workbook.write(fileOut);
             }
@@ -123,4 +122,32 @@ public class ControladorUsuarios {
                     .body("Error al crear el archivo Excel: " + e.getMessage());
         }
     }
+    
+    /**
+     * Actualiza la información de un usuario por su ID.
+     *
+     * @param idUsuario el ID del usuario a actualizar
+     * @param usuario los nuevos datos del usuario
+     * @return una respuesta que indica el éxito o fracaso de la operación
+     */
+    @PutMapping("/usuarios/{idUsuario}")
+    public ResponseEntity<String> updateUsuario(@PathVariable Long idUsuario, @RequestBody Usuario usuario) {
+        Optional<Usuario> usuarioExistente = usuarioRepositorio.findById(idUsuario);
+        
+        if (usuarioExistente.isPresent()) {
+            Usuario usuarioToUpdate = usuarioExistente.get();
+            usuarioToUpdate.setNombre(usuario.getNombre());
+            usuarioToUpdate.setEmail(usuario.getEmail());
+            usuarioToUpdate.setContraseña(usuario.getContraseña());
+            
+            usuarioRepositorio.save(usuarioToUpdate);
+            return ResponseEntity.ok("Usuario actualizado con éxito.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                                 .body("Usuario no encontrado.");
+        }
+    }
+    
+    
+    
 }
