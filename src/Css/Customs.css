@@ -45,7 +45,7 @@ input:focus{
 
 .grid_table{
     display: grid;
-    grid-template-columns: 60px 2fr 1fr 120px;
+    grid-template-columns: 60px 2fr 1fr 120px 120px;
 }
 
 .grid_table_usuario{
