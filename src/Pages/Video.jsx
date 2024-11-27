@@ -4,16 +4,50 @@ import ContenedorMusica from "../Components/ContenedorMusica";
 import Navegador from "../Components/Navegador";
 import MusicPlayerVideo from '../Components/MusicPlayerVideo';
 
+/**
+ * Componente principal para gestionar y mostrar una lista de videos.
+ * Incluye funcionalidades de búsqueda, filtrado, y reproducción.
+ * @component
+ * @returns {JSX.Element}
+ */
 const Video = () => {
+    // Estados
+    /**
+     * @state {boolean} showAllCategories - Determina si se muestran todas las categorías.
+     */
     const [showAllCategories, setShowAllCategories] = useState(false);
+
+    /**
+     * @state {boolean} isOpen - Estado de animación para la ventana de categorías.
+     */
     const [isOpen, setIsOpen] = useState(false);
+
+    /**
+     * @state {Array<Object>} playlist - Lista completa de videos obtenidos de la API.
+     */
     const [playlist, setPlaylist] = useState([]);
+
+    /**
+     * @state {Array<Object>} filteredPlaylist - Lista de videos filtrados por el término de búsqueda.
+     */
     const [filteredPlaylist, setFilteredPlaylist] = useState([]);
+
+    /**
+     * @state {string} searchQuery - Término de búsqueda ingresado por el usuario.
+     */
     const [searchQuery, setSearchQuery] = useState('');
+
+    /**
+     * @state {Object|null} currentTrack - Video actual seleccionado para reproducir.
+     */
     const [currentTrack, setCurrentTrack] = useState(null);
 
+    // Efectos
+    /**
+     * Fetch inicial para obtener los datos de los videos desde la API.
+     * Se ejecuta al cargar el componente.
+     */
     useEffect(() => {
-        // Fetch para capturar los archivos multimedias de la API
         fetch('http://localhost:8080/multimedias/allMultimedias')
             .then(response => response.json())
             .then(data => {
@@ -23,18 +57,29 @@ const Video = () => {
             .catch(error => console.error('Error fetching multimedia:', error));
     }, []);
 
+    /**
+     * Filtra la playlist según el término de búsqueda ingresado por el usuario.
+     * Se actualiza al cambiar `searchQuery` o `playlist`.
+     */
     useEffect(() => {
-        // Filtrar la playlist según el término de búsqueda
         const filtered = playlist.filter(video =>
             video.titulo.toLowerCase().includes(searchQuery.toLowerCase())
         );
         setFilteredPlaylist(filtered);
     }, [searchQuery, playlist]);
 
+    // Handlers
+    /**
+     * Maneja el cambio en el término de búsqueda.
+     * @param {React.ChangeEvent<HTMLInputElement>} e - Evento del input.
+     */
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value);
     };
 
+    /**
+     * Alterna la visibilidad de todas las categorías con animación.
+     */
     const handleShowAllCategories = () => {
         if (!showAllCategories) {
             setShowAllCategories(true);
@@ -45,27 +90,41 @@ const Video = () => {
         }
     };
 
+    /**
+     * Maneja el clic en el fondo oscuro para cerrar las categorías.
+     * @param {React.MouseEvent} e - Evento del clic.
+     */
     const handleBackgroundClick = (e) => {
         if (e.target.id === 'background') {
             handleShowAllCategories();
         }
     };
 
+    /**
+     * Selecciona un video como el track actual para reproducir.
+     * @param {Object} track - Objeto del video seleccionado.
+     */
     const handleTrackClick = (track) => {
         setCurrentTrack(track);
     };
 
+    /**
+     * Genera la URL de la miniatura de un video basado en su URL.
+     * @param {string} url - URL del video.
+     * @returns {string} URL de la miniatura.
+     */
     const getVideoThumbnail = (url) => {
-        // Asumimos que tienes una carpeta con miniaturas locales
-        const videoId = url.split('/').pop().split('.')[0];  // Extrae el nombre del video sin la extensión
+        const videoId = url.split('/').pop().split('.')[0]; // Extrae el nombre del video sin la extensión
         return `http://localhost:8080/thumbnails/${videoId}.jpg`; // Cambia la extensión a la imagen de miniatura
     };
 
+    // Renderizado
     return (
         <>
             <Cabecera />
             <main className='flex flex-col md:flex-row h-screen bg-black text-gray-200 md:h-[550px] md:overflow-y-auto md:bg-[#212121] md:ml-[210px] pb-[100px] rounded-lg'>
                 <div className='flex-1 p-6'>
+                    {/* Barra de búsqueda */}
                     <div className='flex justify-between items-center'>
                         <input
                             type="text"
@@ -76,6 +135,7 @@ const Video = () => {
                         />
                     </div>
 
+                    {/* Sección de categorías */}
                     <div className='mt-6'>
                         <h2 className='text-xl font-bold text-[#e2e2e2]'>Categorías más escuchadas</h2>
                         <div className='flex space-x-2 mt-4'>
@@ -90,6 +150,7 @@ const Video = () => {
                         </div>
                     </div>
 
+                    {/* Lista de videos */}
                     <div className='mt-6'>
                         <h2 className='text-xl font-bold text-[#e2e2e2]'>Escuchados recientemente</h2>
                         <div className='grid grid-cols-2 md:grid-cols-4 gap-4 mt-4'>
@@ -103,6 +164,7 @@ const Video = () => {
                         </div>
                     </div>
 
+                    {/* Tabla de videos */}
                     <div className='mt-6'>
                         <h2 className='text-xl font-bold text-[#e2e2e2]'>Todos los videos</h2>
                         <table className='w-full mt-4 table-auto bg-[#686868]'>
@@ -135,10 +197,13 @@ const Video = () => {
                     </div>
                 </div>
             </main>
+
+            {/* Otros componentes */}
             <ContenedorMusica />
             <Navegador />
             <MusicPlayerVideo currentTrack={currentTrack} setCurrentTrack={setCurrentTrack} playlist={playlist} />
 
+            {/* Modal de categorías */}
             {showAllCategories && (
                 <div id="background" onClick={handleBackgroundClick} className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center transition-opacity duration-300 ease-in-out'>
                     <div className={`bg-[#212121] p-6 rounded-lg w-1/3 transform transition-transform duration-300 ease-in-out ${isOpen ? 'scale-100' : 'scale-0'}`}>
