@@ -162,6 +162,7 @@ const MusicPlayerVideo = ({ currentTrack, setCurrentTrack, playlist }) => {
                         </button>
 
                         <ReactPlayer
+                            ref={playerRef}
                             url={currentTrack ? currentTrack.url : ''}
                             playing={isPlaying}
                             volume={volume}
@@ -189,16 +190,20 @@ const MusicPlayerVideo = ({ currentTrack, setCurrentTrack, playlist }) => {
                                 </button>
                             </div>
 
-                            <div className="flex items-center gap-4 justify-center w-full mt-4" onClick={handleSeekClick}>
+                            <div
+                                className="flex items-center gap-4 justify-center w-full mt-4"
+                                onClick={handleSeekClick} // Aquí añadimos el controlador para manejar clics en la barra de progreso
+                            >
                                 <span className="text-white text-sm">{`${Math.floor(currentTime / 60)}:${Math.floor(currentTime % 60).toString().padStart(2, '0')}`}</span>
-                                <input
-                                    type="range"
-                                    value={(currentTime / durationTime) * 100 || 0}
-                                    onChange={handleSeek}
-                                    onMouseDown={handleSeekMouseDown}
-                                    onMouseUp={handleSeekMouseUp}
-                                    className="w-full h-1 bg-gray-500 rounded-lg"
-                                />
+                                <div
+                                    className="relative w-full h-1 bg-gray-500 rounded-lg cursor-pointer"
+                                    onClick={handleSeekClick} // Controlador de clic para adelantar/retroceder en modo pantalla completa
+                                >
+                                    <div
+                                        className="absolute top-0 left-0 h-full bg-white"
+                                        style={{ width: `${(currentTime / durationTime) * 100 || 0}%` }}
+                                    ></div>
+                                </div>
                                 <span className="text-white text-sm">{`${Math.floor(durationTime / 60)}:${Math.floor(durationTime % 60).toString().padStart(2, '0')}`}</span>
                             </div>
 
