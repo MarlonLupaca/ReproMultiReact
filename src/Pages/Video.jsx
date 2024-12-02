@@ -42,6 +42,36 @@ const Video = () => {
      */
     const [currentTrack, setCurrentTrack] = useState(null);
 
+    /**
+ * Estado para almacenar el género seleccionado por el usuario.
+ * @type {string|null} - Representa el género seleccionado. Puede ser `null` si no hay ningún género seleccionado.
+ */
+    const [selectedGenre, setSelectedGenre] = useState(null);
+
+    /**
+     * Estado para almacenar la lista de géneros musicales obtenidos del servidor.
+     * @type {Array<Object>} - Una lista de objetos que representan los géneros musicales. 
+     * Cada objeto debería incluir los campos esperados del servidor (por ejemplo, `id`, `name`).
+     */
+    const [genres, setGenres] = useState([]);
+
+    /**
+     * useEffect para obtener la lista de géneros musicales desde el servidor.
+     * Se ejecuta una vez al montar el componente.
+     *
+     * - Realiza una solicitud GET a la URL `http://localhost:8080/api/allGenres`.
+     * - Actualiza el estado `genres` con los datos recibidos si la solicitud es exitosa.
+     * - Registra un mensaje de error en la consola si la solicitud falla.
+     *
+     * @function useEffect
+     */
+    useEffect(() => {
+        fetch('http://localhost:8080/api/allGenres') // Realiza la solicitud GET
+            .then(response => response.json())      // Convierte la respuesta a JSON
+            .then(data => setGenres(data))          // Actualiza el estado con los datos recibidos
+            .catch(error => console.error('Error fetching genres:', error)); // Manejo de errores
+    }, []); // Solo se ejecuta una vez al montar
+
     // Efectos
     /**
      * Fetch inicial para obtener los datos de los videos desde la API.
@@ -61,12 +91,15 @@ const Video = () => {
      * Filtra la playlist según el término de búsqueda ingresado por el usuario.
      * Se actualiza al cambiar `searchQuery` o `playlist`.
      */
+    // Agregacion filtro busqueda por genero de la playlist, a parte del titulo del video musical.
     useEffect(() => {
-        const filtered = playlist.filter(video =>
-            video.titulo.toLowerCase().includes(searchQuery.toLowerCase())
-        );
+        const filtered = playlist.filter(video => {
+            const matchesQuery = video.titulo.toLowerCase().includes(searchQuery.toLowerCase());
+            const matchesGenre = selectedGenre ? video.id_genero === selectedGenre : true;
+            return matchesQuery && matchesGenre;
+        });
         setFilteredPlaylist(filtered);
-    }, [searchQuery, playlist]);
+    }, [searchQuery, selectedGenre, playlist]);
 
     // Handlers
     /**
@@ -78,15 +111,23 @@ const Video = () => {
     };
 
     /**
+     * Maneja el clic en un botón de género.
+    * @param {number|null} genreId - ID del género seleccionado o null para mostrar todos.
+    */
+    const handleGenreClick = (genreId) => {
+        setSelectedGenre(genreId);
+    };
+
+    /**
      * Alterna la visibilidad de todas las categorías con animación.
      */
     const handleShowAllCategories = () => {
         if (!showAllCategories) {
             setShowAllCategories(true);
-            setTimeout(() => setIsOpen(true), 50); 
+            setTimeout(() => setIsOpen(true), 50);
         } else {
             setIsOpen(false);
-            setTimeout(() => setShowAllCategories(false), 300); 
+            setTimeout(() => setShowAllCategories(false), 300);
         }
     };
 
@@ -139,13 +180,24 @@ const Video = () => {
                     <div className='mt-6'>
                         <h2 className='text-xl font-bold text-[#e2e2e2]'>Categorías más escuchadas</h2>
                         <div className='flex space-x-2 mt-4'>
-                            {["Pop", "Rock", "Electrónica", "Reggaetón", "Salsa", "Bachata", "Metal"].map((category) => (
-                                <button key={category} className='bg-[#454444] px-4 py-2 rounded-md hover:bg-[#f8496c] text-white transition duration-150 ease-in-out'>
-                                    {category}
+                            {genres.map((genre) => (
+                                <button
+                                    key={genre.idGenero}
+                                    onClick={() => handleGenreClick(genre.idGenero)}
+                                    className={`bg-[#454444] px-4 py-2 rounded-md hover:bg-[#f8496c] text-white transition duration-150 ease-in-out ${selectedGenre === genre.idGenero ? 'bg-[#f8496c]' : ''}`}
+                                >
+                                    {genre.nombre}
                                 </button>
                             ))}
                             <button onClick={handleShowAllCategories} className='bg-[#454444] px-4 py-2 rounded-md text-[#e2e2e2] hover:bg-[#f8496c] transition duration-150 ease-in-out'>
-                                Mostrar todos
+                                Mostrar más
+                            </button>
+                            <button
+                                onClick={() => handleGenreClick(null)} // Null deselecciona el género
+                                className={`bg-[#454444] px-4 py-2 rounded-md hover:bg-[#f8496c] text-[#e2e2e2] transition duration-150 ease-in-out ${selectedGenre === null ? 'bg-[#f8496c]' : ''
+                                    }`}
+                            >
+                                Deshacer filtro
                             </button>
                         </div>
                     </div>
@@ -209,7 +261,7 @@ const Video = () => {
                     <div className={`bg-[#212121] p-6 rounded-lg w-1/3 transform transition-transform duration-300 ease-in-out ${isOpen ? 'scale-100' : 'scale-0'}`}>
                         <h3 className='text-xl text-[#e2e2e2] font-bold mb-4'>Más Categorías</h3>
                         <div className='flex flex-wrap gap-2'>
-                            {["Jazz", "Blues", "Hip-Hop", "Clásica", "Indie", "Latina", "Country", "R&B"].map((category) => (
+                            {["Indie", "Latina", "R&B", "Soul", "Funk", "House", "K-Pop", "Cumbia", "Trap"].map((category) => (
                                 <button key={category} className='bg-[#454444] px-4 py-2 rounded-md hover:bg-[#f8496c] text-white transition duration-150 ease-in-out'>
                                     {category}
                                 </button>
