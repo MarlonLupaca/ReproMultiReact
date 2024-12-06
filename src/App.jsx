@@ -10,7 +10,7 @@ import Descarga from "./Pages/Descarga";
 import Login from "./Pages/Login";
 import Admin from "./Pages/Admin";
 import Registrarse from "./Pages/Registrarse";
-import { UserProvider } from "./context/ContextoGlobal";
+
 import Gestion from "./Pages/Gestion";
 
 
