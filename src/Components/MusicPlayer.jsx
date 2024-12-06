@@ -1,25 +1,28 @@
 import React, { useState, useRef, forwardRef, useImperativeHandle } from "react";
+import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute, FaStepForward, FaStepBackward } from "react-icons/fa";
 
 const MusicPlayer = forwardRef((props, ref) => {
-
     const [isPlaying, setIsPlaying] = useState(false);
     const [progress, setProgress] = useState(0);
     const [currentTime, setCurrentTime] = useState("0:00");
     const [durationTime, setDurationTime] = useState("0:00");
-    const [volume, setVolume] = useState(1); 
+    const [volume, setVolume] = useState(1);
     const audioRef = useRef(null);
-    const [nombre, setnombre] = useState("Sin Cancion")
-    const [url, seturl] = useState("Sin Cancion")
-
-    const reproducir = async (nombre, url) => {
-        await setnombre(nombre);
-        await seturl(url)
-        await togglePlayPause();
-    };
+    const [songDetails, setSongDetails] = useState({ name: "Sin Canción", url: "" });
 
     useImperativeHandle(ref, () => ({
-        reproducir,
+        playSong: (name, url) => {
+            if (!name || !url) {
+                // Si no se pasa una canción, pausa la reproducción
+                audioRef.current.pause();
+                setIsPlaying(false);
+                return;
+            }
+            setSongDetails({ name, url });
+            setIsPlaying(true);
+        },
     }));
+    
 
     const togglePlayPause = () => {
         if (isPlaying) {
@@ -31,8 +34,8 @@ const MusicPlayer = forwardRef((props, ref) => {
     };
 
     const handleProgress = () => {
-        const currentTime = audioRef.current.currentTime;
-        const duration = audioRef.current.duration;
+        const { currentTime, duration } = audioRef.current;
+        setProgress((currentTime / duration) * 100);
 
         const formatTime = (time) => {
             const minutes = Math.floor(time / 60);
@@ -41,14 +44,12 @@ const MusicPlayer = forwardRef((props, ref) => {
         };
 
         setCurrentTime(formatTime(currentTime));
-        setDurationTime(formatTime(duration));
-        setProgress((currentTime / duration) * 100);
+        setDurationTime(formatTime(duration || 0));
     };
 
     const handleSeek = (e) => {
         const newTime = (e.target.value / 100) * audioRef.current.duration;
         audioRef.current.currentTime = newTime;
-        setProgress(e.target.value);
     };
 
     const handleVolumeChange = (e) => {
@@ -58,62 +59,59 @@ const MusicPlayer = forwardRef((props, ref) => {
     };
 
     return (
-        <div className=" grid_cancion fixed bottom-0 bg-black p-4 rounded-lg shadow-lg w-full">
+        <div className="fixed bottom-0 bg-black p-4 w-full grid grid-cols-3 items-center gap-4">
+            {/* Sección de información de la canción */}
             <div className="flex items-center">
-                <div className="w-[50px] h-[50px] rounded-full mr-4 flex justify-center items-center"> 
-                    <img src="Logo_pri.svg" alt="logo_default" />
-                </div>
-                <div>
-                    <p className="text-white font-semibold">{nombre}</p>
+                <img src="Logo_pri.svg" alt="Album Cover" className="h-12 w-12 mr-4" />
+                <div className="overflow-hidden">
+                    <p className="text-white font-semibold truncate w-40 sm:w-64">{songDetails.name}</p>
+                    <p className="text-sm text-gray-400">Artista Desconocido</p>
                 </div>
             </div>
-            <div className="w-[600px] flex flex-col justify-center items-center ">
-                <div className="flex-1 flex justify-center items-center gap-4 mx-6 w-full mb-1 ">
-                    <button className="text-gray-400 hover:text-white">
-                        <i className="fas fa-step-backward"></i> 
-                    </button>
-                    <button
-                        onClick={togglePlayPause}
-                        className="flex justify-center items-center bg-white text-black rounded-full h-[30px] w-[30px] hover:bg-gray-300"
-                    >
-                        <i className={`fas ${isPlaying ? "fa-pause" : "fa-play"}`}></i>
-                    </button>
-                    <button className="text-gray-400 hover:text-white">
-                        <i className="fas fa-step-forward"></i>
-                    </button>
-                </div>
 
-                <div className="flex items-center gap-2 w-full">
+            {/* Sección de controles de reproducción */}
+            <div className="flex flex-col items-center">
+                <div className="flex items-center gap-4">
+                    <FaStepBackward className="text-white cursor-pointer" />
+                    <button onClick={togglePlayPause}>
+                        {isPlaying ? <FaPause className="text-white text-2xl" /> : <FaPlay className="text-white text-2xl" />}
+                    </button>
+                    <FaStepForward className="text-white cursor-pointer" />
+                </div>
+                <div className="flex items-center w-full gap-2 mt-2">
                     <span className="text-white text-xs">{currentTime}</span>
                     <input
                         type="range"
                         value={progress}
                         onChange={handleSeek}
-                        className="w-full h-1 bg-gray-500 rounded"
+                        className="w-full h-1 bg-gray-700 rounded-lg"
                     />
                     <span className="text-white text-xs">{durationTime}</span>
                 </div>
             </div>
 
-            <div className="flex items-center gap-4 justify-self-end">
-                <i className="fa-solid fa-volume-high text-white"></i>
+            {/* Sección de controles de volumen */}
+            <div className="flex items-center justify-end gap-4">
+                {volume > 0 ? (
+                    <FaVolumeUp className="text-white cursor-pointer" />
+                ) : (
+                    <FaVolumeMute className="text-white cursor-pointer" />
+                )}
                 <input
                     type="range"
                     value={volume * 100}
                     onChange={handleVolumeChange}
-                    className="w-[80px] h-1 bg-gray-500 rounded"
+                    className="w-20 h-1 bg-gray-700 rounded-lg"
                 />
-                <button className="text-gray-400 hover:text-white">
-                    <i className="fas fa-expand"></i>
-                </button>
             </div>
 
             <audio
                 ref={audioRef}
-                src={url}
+                src={songDetails.url}
                 onTimeUpdate={handleProgress}
                 onLoadedMetadata={handleProgress}
-            ></audio>
+                autoPlay
+            />
         </div>
     );
 });

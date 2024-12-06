@@ -12,7 +12,7 @@ const Home = () => {
         <>
             <Cabecera/>
             <main className="rounded-lg flex flex-col gap-10 py-4 md:ml-[210px] md:h-[580px] md:overflow-y-auto md:bg-[#212121] border-green-600">
-                <Caja_Recientes cancion="cancion1"/> 
+                <Caja_Recientes/> 
                 
                 <Caja_Archivos/>
             </main>
