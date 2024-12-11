@@ -79,11 +79,23 @@ const Login = () => {
                     <button type='submit' className='Box_personalizado bg-[#ff4081] px-4 py-2 w-[250px] rounded-[5px] text-[16px] font-[800]'>
                         Iniciar sesión
                     </button>
+
+
                     <Link to="/Registrarse">
                         <button className='Box_personalizado bg-[#ff4081] px-4 py-2 w-[250px] rounded-[5px] text-[16px] font-[800]'>
                             Registrarse
                         </button>
                     </Link>
+
+
+                    <Link to="/Home">
+                        <button type='button' className='Box_personalizado border border-[#ff4081] px-4 py-2 w-[250px] rounded-[5px] text-[16px] font-[800]'>
+                            Modo invitado
+                        </button>
+                    </Link>
+                    
+
+
                     
                 </div>
             </form>

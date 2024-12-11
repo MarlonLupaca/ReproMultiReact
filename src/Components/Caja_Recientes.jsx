@@ -6,6 +6,24 @@ const Caja_Recientes = () => {
     const [mostrarTodo, setMostrarTodo] = useState(false);
     const [error, setError] = useState(null);
 
+    const cancionesSinConexion = [
+        { nombre: "Bohemian Rhapsody" },
+        { nombre: "Hotel California" },
+        { nombre: "Stairway to Heaven" },
+        { nombre: "Imagine" },
+        { nombre: "Sweet Child O' Mine" },
+        { nombre: "Smells Like Teen Spirit" },
+        { nombre: "Billie Jean" },
+        { nombre: "Hey Jude" },
+        { nombre: "Like a Rolling Stone" },
+        { nombre: "Wonderwall" },
+        { nombre: "Livin' on a Prayer" },
+        { nombre: "November Rain" },
+        { nombre: "Wish You Were Here" },
+        { nombre: "Back in Black" },
+        { nombre: "Thunderstruck" }
+    ];
+
     // Llamar a la API para obtener las canciones
     useEffect(() => {
         const fetchCanciones = async () => {
@@ -13,11 +31,14 @@ const Caja_Recientes = () => {
                 const response = await fetch('http://localhost:8080/api/ultimas-canciones');
                 if (!response.ok) {
                     throw new Error('Error al obtener las canciones');
+                    
                 }
                 const data = await response.json();
                 setCanciones(data);
             } catch (err) {
                 setError(err.message);
+                setCanciones(cancionesSinConexion)
+
             }
         };
 
@@ -44,11 +65,13 @@ const Caja_Recientes = () => {
             </div>
 
             <div className='gap-4 flex flex-wrap justify-center'>
-                {error && (
-                    <div className="text-red-500">
-                        Error al cargar canciones: {error}
-                    </div>
-                )}
+                {error && cancionesMostradas.map((cancion, index) => (
+                        <Card 
+                            key={index} 
+                            tamaño_texto="13px" 
+                            name={cancion.nombre} 
+                        />))
+                }
                 {!error && cancionesMostradas.map((cancion, index) => (
                     <Card 
                         key={index} 
